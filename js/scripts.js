@@ -1,6 +1,5 @@
 'use strict'
 
-
 //  button event
 var select_btn;
 var h_race, h_class, h_spead;
@@ -105,33 +104,36 @@ for (let i = 0; i < count_backstory.length; i++) {                          // �
 button_random_story.onclick = function () {                                 // Дані для рандом-кнопкі
     var random = Math.floor(Math.random() * count_backstory.length);
     backstory = document.querySelector('.backstory-'+random+'');
-    for (let i = 0; i < count_backstory.length; i++) {      
+    var closeOpenDetaile = document.querySelectorAll('.h-backstory > div > div');
+    alert(random);
+    for (let i = 0; i < count_backstory.length; i++) {
+        closeOpenDetaile[i].classList.remove('openlist');
+        closeOpenDetaile[i].classList.add('closelist');
         if(i != random){
             count_backstory[i].classList.add('selected');
             count_backstory[i].classList.remove('expected');
         }else{
             count_backstory[i].classList.add('expected');
             count_backstory[i].classList.remove('selected');
-        }
-    }
+        };
+    };
 
-}
+};
 
-function open_deteils() {
-    var openCloseElement, prevOpenCloseElement;
-    var btnOpentDeteils = document.querySelectorAll('.h-backstory > div > button')
-    for (let i = 0; i < btnOpentDeteils.length; i++) {
-        btnOpentDeteils[i].onclick = function() {
-            openCloseElement = this.nextElementSibling;
-            openCloseElement.classList.toggle('closelist');
-            openCloseElement.classList.toggle('openlist');
-            prevOpenCloseElement = openCloseElement;
-            if (prevOpenCloseElement !== openCloseElement) {
+function open_deteils() {                                                                   // функція для вибору backstory
+    var openCloseElement, prevOpenCloseElement;                                             // Елемент який приховує диталі та попередній елемент    
+    var btnOpentDeteils = document.querySelectorAll('.h-backstory > div > button');         // пошук кнопки для перегляду деталей
+    for (let i = 0; i < btnOpentDeteils.length; i++) {      
+        btnOpentDeteils[i].onclick = function() {                                           // event для кнопки
+            openCloseElement = this.nextElementSibling;                                     // присвоюю елемент який приховує деталі
+            openCloseElement.classList.toggle('closelist');                                 // забирає клас closelist
+            openCloseElement.classList.toggle('openlist');                                  // додає клас openlist
+            
+            if (prevOpenCloseElement != openCloseElement && prevOpenCloseElement != null) { // перевірка на попередньо backstory
                 prevOpenCloseElement.classList.add('closelist');
                 prevOpenCloseElement.classList.remove('openlist');   
             }
-        }
-    }
-    
-   
-}
+            prevOpenCloseElement = openCloseElement;
+        };
+    };
+};
