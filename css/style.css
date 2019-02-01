@@ -1,0 +1,19 @@
+
+
+
+
+.choice ul li{
+    list-style: none;
+}
+.open-list ul{
+    display: none;
+}
+.open-list:hover ul{
+    display: block;
+}
+.closelist,.selected {
+    display: none;
+}
+.openlist,.expected{
+    display: block;
+}
