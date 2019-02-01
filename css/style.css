@@ -1,14 +1,18 @@
 
-
+div{
+    box-sizing: border-box;
+    overflow: hidden;
+}
 
 
 .choice ul li{
     list-style: none;
 }
-.open-list ul{
+.open-list ul,.open-list p{
     display: none;
 }
-.open-list:hover ul{
+
+.open-list:hover ul, .open-list:hover p{
     display: block;
 }
 .closelist,.selected {
