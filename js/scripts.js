@@ -109,10 +109,13 @@ button_random_story.onclick = function () {                                 // Ð
     for (let i = 0; i < count_backstory.length; i++) {
         closeOpenDetaile[i].classList.remove('openlist');
         closeOpenDetaile[i].classList.add('closelist');
+
         if(i != random){
             count_backstory[i].classList.add('selected');
             count_backstory[i].classList.remove('expected');
         }else{
+            closeOpenDetaile[i].classList.add('openlist');
+            closeOpenDetaile[i].classList.remove('closelist');
             count_backstory[i].classList.add('expected');
             count_backstory[i].classList.remove('selected');
         };
