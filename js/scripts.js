@@ -126,6 +126,7 @@ button_random_story.onclick = function () {                                 // �
 function open_deteils() {                                                                   // функція для вибору backstory
     var openCloseElement, prevOpenCloseElement;                                             // Елемент який приховує диталі та попередній елемент    
     var btnOpentDeteils = document.querySelectorAll('.h-backstory > div > button');         // пошук кнопки для перегляду деталей
+
     for (let i = 0; i < btnOpentDeteils.length; i++) {      
         btnOpentDeteils[i].onclick = function() {                                           // event для кнопки
             openCloseElement = this.nextElementSibling;                                     // присвоюю елемент який приховує деталі
@@ -137,6 +138,24 @@ function open_deteils() {                                                       
                 prevOpenCloseElement.classList.remove('openlist');   
             }
             prevOpenCloseElement = openCloseElement;
+            
+            SelectBackstory(this.parentElement);
         };
     };
 };
+
+function SelectBackstory(element){
+    var btnSelected = element.querySelector('div div div button');
+    element.classList.add('expected');
+    var closeChoiceBtn = element.querySelector('button');
+    var openSgsChrctrstc = element.querySelector('.SuggestedCharacteristics');
+    btnSelected.onclick = function () {
+        if (confirm('Ви впевені що хочити вибрати предісторію '+this.value))
+        {
+            closeChoiceBtn.classList.add('selected');
+            element.querySelector('div > div >  div').classList.add('closelist');
+            element.querySelector('div > div >  div').classList.remove('openlist');
+            
+        }
+    }
+}
