@@ -94,18 +94,17 @@ for (var i = 0, array = radio_fighter.length; i < array; i++) {
 
 //    backstrory
 var backstory;
-var count_backstory = document.querySelectorAll('.h-backstory > div');      // беру кількість backstory для рандома
+var count_backstory = document.querySelectorAll('.h-backstory > div');                    // беру кількість backstory для рандома
 
-var button_random_story = document.querySelector('#random-backstory');      // головна кнопка для рандома
-for (let i = 0; i < count_backstory.length; i++) {                          // цикл в якому перераховую кількість backstory 
-    count_backstory[i].classList.add('backstory-'+i)                        // та да їм відповідні класи
+var button_random_story = document.querySelector('#random-backstory');                    // головна кнопка для рандома
+for (let i = 0; i < count_backstory.length; i++) {                                        // цикл в якому перераховую кількість backstory 
+    count_backstory[i].classList.add('backstory-'+i)                                      // та да їм відповідні класи
 }
 
-button_random_story.onclick = function () {                                 // Дані для рандом-кнопкі
+button_random_story.onclick = function () {                                               // Дані для рандом-кнопкі
     var random = Math.floor(Math.random() * count_backstory.length);
     backstory = document.querySelector('.backstory-'+random+'');
     var closeOpenDetaile = document.querySelectorAll('.h-backstory > div > div');
-    alert(random);
     for (let i = 0; i < count_backstory.length; i++) {
         closeOpenDetaile[i].classList.remove('openlist');
         closeOpenDetaile[i].classList.add('closelist');
@@ -114,10 +113,9 @@ button_random_story.onclick = function () {                                 // �
             count_backstory[i].classList.add('selected');
             count_backstory[i].classList.remove('expected');
         }else{
-            closeOpenDetaile[i].classList.add('openlist');
-            closeOpenDetaile[i].classList.remove('closelist');
             count_backstory[i].classList.add('expected');
             count_backstory[i].classList.remove('selected');
+            backstory.querySelector('div > div > button').click();                          //activate function open_deteils
         };
     };
 
@@ -144,18 +142,26 @@ function open_deteils() {                                                       
     };
 };
 
-function SelectBackstory(element){
-    var btnSelected = element.querySelector('div div div button');
-    element.classList.add('expected');
-    var closeChoiceBtn = element.querySelector('button');
-    var openSgsChrctrstc = element.querySelector('.SuggestedCharacteristics');
+function SelectBackstory(element){                                                          // Function for confirmation Backstory              
+    var btnSelected = element.querySelector('div div div button');                          // fint confirmation button
+    element.classList.add('expected');                                                      // add class to selected backstory
+    alert(element.classList[0]);
+    var closeDetailseBtn = element.querySelector('button');                                 // take Details btn      
+    var openSgsChrctrstc = element.querySelector('.SuggestedCharacteristics');              // find next stage
     btnSelected.onclick = function () {
         if (confirm('Ви впевені що хочити вибрати предісторію '+this.value))
         {
-            closeChoiceBtn.classList.add('selected');
-            element.querySelector('div > div >  div').classList.add('closelist');
+            closeDetailseBtn.classList.add('selected');                                     // close btn deteils
+            element.querySelector('div > div >  div').classList.add('closelist');           // close deteils backstory
             element.querySelector('div > div >  div').classList.remove('openlist');
-            
+            button_random_story.classList.add('closelist');                                 // add class to first button random
+            for (let i = 0; i < count_backstory.length; i++) {                              
+                if(count_backstory[i].classList.contains(element.classList[0]) == false)    // hides not selected backstory
+                {
+                    count_backstory[i].classList.add('selected');
+                }
+                
+            }
         }
     }
 }
