@@ -144,25 +144,36 @@ function open_deteils() {                                                       
 
 function SelectBackstory(element){                                                          // Function for confirmation Backstory              
     var btnSelected = element.querySelector('div div div button');                          // fint confirmation button
-    element.classList.add('expected');                                                      // add class to selected backstory
     var closeDetailseBtn = element.querySelector('button');                                 // take Details btn      
     var openSgsChrctrstc = element.querySelector('.SuggestedCharacteristics');              // find next stage
     btnSelected.onclick = function () {
         if (confirm('Ви впевені що хочити вибрати предісторію '+this.value))
         {
             closeDetailseBtn.classList.add('selected');                                     // close btn deteils
-            element.querySelector('div > div > div > div').classList.add('closelist');           // close deteils backstory
-            element.querySelector('div > div > div > div').classList.remove('openlist');
+            element.querySelector('div > div > div  div').classList.add('closelist');       // close deteils backstory
+            element.querySelector('div > div > div  div').classList.remove('openlist');
             button_random_story.classList.add('closelist');                                 // add class to first button random
             for (let i = 0; i < count_backstory.length; i++) {                              
                 if(count_backstory[i].classList.contains(element.classList[0]) == false)    // hides not selected backstory
                 {
                     count_backstory[i].classList.add('selected');
-                }
-                openSgsChrctrstc.classList.add('openlist');
-                openSgsChrctrstc.classList.remove('closelist');
-                
+                }else count_backstory[i].classList.add('expected');
             }
+            openSgsChrctrstc.classList.add('openlist');
+            openSgsChrctrstc.classList.remove('closelist');
+            checkboxMax(2,openSgsChrctrstc);
+            
         }
+    }
+}
+function checkboxMax(numberMax, whereFind){
+    var checks = whereFind.querySelectorAll('input[type=checkbox]');
+    var max = numberMax;
+    for (var i = 0; i < checks.length; i++)
+      checks[i].onclick = selectiveCheck;
+    function selectiveCheck (event) {
+      var checkedChecks = whereFind.querySelectorAll('input[type=checkbox]:checked');
+      if (checkedChecks.length >= max + 1)
+        return false;
     }
 }
